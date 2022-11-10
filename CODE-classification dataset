@@ -1,0 +1,42 @@
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import make_circles
+import matplotlib.pyplot as plt
+
+np.random.seed(42)
+x,y=make_circles(n_samples=500,factor=0.1,noise=0.35,random_state=42)
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2)
+
+x.shape
+
+plt.scatter(x[:,0],x[:,1],c=y)
+
+from sklearn.tree import DecisionTreeClassifier
+
+dtree=DecisionTreeClassifier(random_state=42)
+dtree.fit(x_train,y_train)
+
+plt.figure(figsize=(12,8))
+x_range=np.linspace(x.min(),x.max(),100)
+xx1,xx2=np.meshgrid(x_range,x_range)
+y_hat=dtree.predict(np.c_[xx1.ravel(),xx2.ravel()])
+y_hat=y_hat.reshape(xx1.shape)
+plt.contourf(xx1,xx2,y_hat,alpha=0.2)
+plt.scatter(x[:,0],x[:,1],c=y,cmap='virdis',alpha=7)
+plt.title("Decision Tree")
+plt.show()
+
+from sklearn.tree import RandomForestClassifier
+
+rf=RandomForestClassifier(n_estimators=500,random_state=42)
+rf.fit(x_train,y_train)
+
+plt.figure(figsize=(12,8))
+x_range=np.linspace(x.min(),x.max(),100)
+xx1,xx2=np.meshgrid(x_range,x_range)
+y_hat=rf.predict(np.c_[xx1.ravel(),xx2.ravel()])
+y_hat=y_hat.reshape(xx1.shape)
+plt.contourf(xx1,xx2,y_hat,alpha=0.2)
+plt.scatter(x[:,0],x[:,1],c=y,cmap='virdis',alpha=7)
+plt.title("Random Forest")
+plt.show()
