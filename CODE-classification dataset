@@ -40,3 +40,46 @@ plt.contourf(xx1,xx2,y_hat,alpha=0.2)
 plt.scatter(x[:,0],x[:,1],c=y,cmap='virdis',alpha=7)
 plt.title("Random Forest")
 plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#SAME EXAMPLE CAN BE SHOWN ON REGRESSION AS WELL
+
+n_train=150
+n_test=1000
+noise=0.1
+
+#Generate data
+def f(x):
+    x=x.ravel()
+    return np.exp(-x ** 2)+1.5*np.exp(-(x-2)**2)
+    
+def generate(n_samples,noise):
+    x=np.random.rand(n_samples)*10-5
+    x=np.sort(x).ravel()
+    y=np.exp(-x**2)+1.5*np.exp(-(x-2)**2\
+      + np.random.normal(0.0,noise,n_samples)
+    x=x.reshape((n_samples,1))
+    
+    return x,y
+    
+x_train,y_train=generate(n_samples=n_train,noise=noise)
+x_test,y_test=generate(n_samples=n_test,noise=noise)
+
+plt.figure(figsize=(18,8))
+plt.plot(x_test,f(x_test),"r")
+plt.scatter(x_train,y_train,c="b",s=20)
+plt.xlim([-5,5])
+
