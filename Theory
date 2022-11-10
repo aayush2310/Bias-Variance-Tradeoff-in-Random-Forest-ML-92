@@ -1,0 +1,3 @@
+Random forest converts a LB,HV algo into a LB,LV algo.
+Base models are fully grown DT=>lB,HV
+Impact gets distributed=>LV
