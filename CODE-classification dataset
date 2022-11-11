@@ -83,3 +83,34 @@ plt.plot(x_test,f(x_test),"r")
 plt.scatter(x_train,y_train,c="b",s=20)
 plt.xlim([-5,5])
 
+
+#   One decision tree regressor
+
+from sklearn.tree import DecisionTreeRegressor
+
+dtree=DecisionTreeRegressor().fit(x_train,y_train)
+d_predict=dtree.predict(x_test)
+
+plt.figure(figsize=(18,8))
+plt.plot(x_test,f(x_test),"r")
+plt.scatter(x_train,y_train,c="b",s=20)
+plt.plot(x_test,d_predict,"g",lw=2)
+plt.xlim([-5,5])
+plt.title("Decision tree, MSE=%.2f" % np.sum((y_test-d_predict)**2))
+
+
+
+
+#Random Forest
+
+from sklearn.ensemble import RandomForestRegressor
+
+rfr=RandomForestRegressor(n_estimators=1000).fit(x_train,y_train)
+rf_predict=rfr.predict(x_test)
+
+plt.figure(figsize=(18,8))
+plt.plot(x_test,f(x_test),"r")
+plt.scatter(x_train,y_train,c="b",s=20)
+plt.plot(x_test,rf_predict,"g",lw=2)
+plt.xlim([-5,5])
+plt.title("Random forest,MSE=%.2f" % np.sum((y_test-rf_predict)**2));
